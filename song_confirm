@@ -1,0 +1,98 @@
+<?php
+session_start();
+//check if session exists
+if(isset($_SESSION["UID"])) {
+?>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<?php
+
+    $Songname = $_POST["Songname"];    
+    $Artistname = $_POST["Artistname"];   
+    $Media = $_POST["Media"];   
+    $Genre = $_POST["Genre"] ;  
+    $Language = $_POST["Language"];   
+    $Releasedate = $_POST["Releasedate"] ;
+ 
+?>
+ 
+<body>
+<h1>Pet Registration Details</h1>
+<br>
+<table border =1>
+<tr>
+<th>Pet Name:</th>
+<td><b style="color:blue"><?php echo $Songname;?></b></td>
+</tr>
+<tr>
+<th>Pet Type:</th>
+<td><b><?php echo $Artistname;?></b></td>
+</tr>
+<tr>
+<th>Pet Breed:</th>
+<td><b><?php echo $Media;?></b></td>
+</tr>
+<tr>
+<th>Pet Color:</th>
+<td><b><?php echo $Genre;?></b></td>
+</tr>
+<tr>
+<th>Pet Age(month):</th>
+<td><b><?php echo $Language;?></b></td>
+</tr>
+<tr>
+<th>Pet Price:</th>
+<td><b>RM<?php echo $Releasedate;?></b></td>
+</tr>
+</table>
+<?php
+session_start(); // Start the session
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "song_collectiondb";
+
+$conn = new mysqli($host, $user, $pass, $db);
+
+if ($conn->connect_error) { 
+    die("Connection Fail" . $conn->connect_error); 
+} else {
+    if(isset($_POST["Songname"]) && isset($_POST["Artistname"]) && isset($_POST["Media"]) && isset($_POST["Genre"]) && isset($_POST["Language"]) && isset($_POST["Releasedate"])) {
+        $Songname = $_POST["Songname"];    
+        $Artistname = $_POST["Artistname"];   
+        $Media = $_POST["Media"];   
+        $Genre = $_POST["Genre"] ;  
+        $Language = $_POST["Language"];   
+        $Releasedate = $_POST["Releasedate"] ;  
+
+        $dbquery = "INSERT INTO song (Song_Name, Artist_Name, Media, Song_Genre, Song_Language, Release_Date, Owner_ID) VALUES ('".$Songname."', '".$Artistname."','".$Media."', '".$Genre."', '".$Language."', '".$Releasedate."', '".$_SESSION["UID"]."')"; 
+
+        if ($conn->query($dbquery) === TRUE) { 
+            echo "<p style='color:blue;'> Success insert record</p>"; 
+        } else { 
+            echo "<p style='color:red;'> Failed to insert" . $conn->error. "</p>"; 
+        }
+    } else {
+        echo "<p style='color:red;'> Please fill in all the required fields.</p>";
+    }
+}
+
+$conn->close(); 
+?>
+<br> 
+<P>click <a href="pet_form.php">here</a> to enter new pet details.</p>
+<P>click <a href ="ViewPet.php">here</a> to view ALL Pet Details.</p>
+</body>
+</head>
+</html>
+<?php
+}
+else
+{
+echo "No session exists or session has expired. Please
+log in again.<br>";
+echo "<a href=login.html> Login </a>";
+}
+?>

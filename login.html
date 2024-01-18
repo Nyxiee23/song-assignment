@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Collection</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1db954;
+        }
+
+        p {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #282828;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #1db954;
+            border-radius: 4px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        input[type="reset"],
+        input[type="submit"] {
+            background-color: #1db954;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="reset"]:hover,
+        input[type="submit"]:hover {
+            background-color: #168038;
+        }
+
+        i {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Song Collection</h1>
+    <p>Enter your user ID & password :</p>
+    <form name="loginform" action="loginVerify.php" method="POST">
+        User ID <input type="text" name="userID" maxlength="10" required><br><br>
+        Password <input type="password" name="userPwd" maxlength="10" required><br>
+    
+        <input type="reset" value="Cancel">
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
